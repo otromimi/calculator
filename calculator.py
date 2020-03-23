@@ -1,10 +1,12 @@
-# importing module tkinter as an object "tk"
+# importing module tkinter FULL
 from tkinter import *
 
 # creating root frame
 root = Tk()
-root.resizable(False, False)    # Making it of a fixed size
+root.resizable(False, False)  # Making it of a fixed size
 root.geometry("+1200+150")  # Setting the position of the window on the screen
+
+f_num = 123
 
 
 def on_click(num):
@@ -15,6 +17,26 @@ def erase():
     input_field.delete(0, END)
 
 
+def plus_func():
+    num = int(input_field.get())
+    print(f_num)
+    f_num = num
+    erase()
+
+
+def less_func():
+    num = int(input_field.get())
+    f_num = -1 * num
+    erase()
+
+
+def equals_func():
+    f_num += int(input_field.get())
+    erase()
+    input_field.insert(str(f_num))
+
+
+# calculator number buttons
 button_1 = Button(root, text="1", height=3, width=8, command=lambda: on_click(1))
 button_2 = Button(root, text="2", height=3, width=8, command=lambda: on_click(2))
 button_3 = Button(root, text="3", height=3, width=8, command=lambda: on_click(3))
@@ -25,14 +47,13 @@ button_7 = Button(root, text="7", height=3, width=8, command=lambda: on_click(7)
 button_8 = Button(root, text="8", height=3, width=8, command=lambda: on_click(8))
 button_9 = Button(root, text="9", height=3, width=8, command=lambda: on_click(9))
 button_0 = Button(root, text="0", height=3, width=8, command=lambda: on_click(0))
-
-button_add = Button(root, text="+", height=3, width=8)
-button_subtract = Button(root, text="-", height=3, width=8)
-button_equals = Button(root, text="=")
+# function buttons of the calculator
+button_add = Button(root, text="+", height=3, width=8, command=plus_func)
+button_subtract = Button(root, text="-", height=3, width=8, command=less_func)
+button_equals = Button(root, text="=", command=equals_func)
 button_clear = Button(root, text="clear", height=3, width=8, command=erase)
-
+# input field for numbers
 input_field = Entry(root, width=8 * 3, borderwidth=5)
-
 
 # Adding to the main frame
 input_field.grid(row=0, columnspan=3, sticky='nsew')
