@@ -6,7 +6,7 @@ root = Tk()
 root.resizable(False, False)  # Making it of a fixed size
 root.geometry("+1200+150")  # Setting the position of the window on the screen
 
-f_num = 123
+f_num = 87
 
 
 def on_click(num):
@@ -18,22 +18,32 @@ def erase():
 
 
 def plus_func():
+    global f_num
     num = int(input_field.get())
-    print(f_num)
     f_num = num
     erase()
 
 
 def less_func():
+    global f_num
     num = int(input_field.get())
     f_num = -1 * num
     erase()
 
 
 def equals_func():
-    f_num += int(input_field.get())
+    global f_num
+    old_f_num = int(input_field.get())
+    if f_num < 0:
+        f_num = f_num * -1 - int(input_field.get())
+        old_f_num = old_f_num * -1
+    else:
+        f_num += int(input_field.get())
     erase()
-    input_field.insert(str(f_num))
+    input_field.insert(0, str(f_num))
+    f_num = old_f_num
+
+
 
 
 # calculator number buttons
